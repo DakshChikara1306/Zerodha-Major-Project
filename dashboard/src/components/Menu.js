@@ -22,9 +22,13 @@ const Menu = () => {
     } catch (err) {
       console.error("Logout failed", err);
     } finally {
-      navigate("http://localhost:3001/login");
+      const landing = process.env.REACT_APP_LANDING_URL;
+      window.location.href = landing
+        ? `${landing}/login`
+        : "/login";
     }
   };
+  
 
   const menuClass = "menu";
   const activeMenuClass = "menu selected";

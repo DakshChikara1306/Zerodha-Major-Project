@@ -1,34 +1,26 @@
-import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../api";
 
 const ProtectedRoute = ({ children }) => {
   const [loading, setLoading] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    api
-      .get("/me")
-      .then(() => {
-        setAuthorized(true);
-      })
-      .catch(() => {
-        setAuthorized(false);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    api.get("/me").finally(() => {
+      setLoading(false);
+    });
   }, []);
 
   if (loading) {
-    return <p style={{ padding: "20px" }}>Checking authentication...</p>;
+    return <p style={{ padding: "20px" }}>Redirecting to login...</p>;
   }
 
-  if (!authorized) {
-    return <Navigate to="/login" replace />;
-  }
+  // 🔥 Explicit redirect
+  const landing = process.env.REACT_APP_LANDING_URL;
+  window.location.href = landing
+    ? `${landing}/login`
+    : "/login";
 
-  return children;
+  return null;
 };
 
 export default ProtectedRoute;
