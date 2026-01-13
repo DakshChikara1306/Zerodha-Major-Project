@@ -29,8 +29,8 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      process.env.DASHBOARD_URL,
-      process.env.LANDING_URL,
+      "https://zerodha-frontend-bywd.onrender.com",
+      "https://zerodha-dashboard-a4e2.onrender.com",
     ],
     credentials: true,
   })
