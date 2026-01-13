@@ -11,13 +11,14 @@ function Login() {
       setError("");
 
       await axios.post(
-        "http://localhost:3002/login",
+        `${process.env.REACT_APP_API_BASE_URL}/login`,
         form,
         { withCredentials: true }
       );
-
-      // ✅ redirect to dashboard app
-      window.location.href = "http://localhost:3000/";
+      
+      // redirect to dashboard
+      window.location.href = process.env.REACT_APP_DASHBOARD_URL;
+      
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }

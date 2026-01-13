@@ -15,13 +15,14 @@ function Signup() {
       setError("");
 
       await axios.post(
-        "http://localhost:3002/signup",
+        `${process.env.REACT_APP_API_BASE_URL}/signup`,
         form,
         { withCredentials: true }
       );
-
-      // ✅ auto-login via cookie → go to dashboard
-      window.location.href = "http://localhost:3000/";
+      
+      // auto-login → dashboard
+      window.location.href = process.env.REACT_APP_DASHBOARD_URL;
+      
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
     }
