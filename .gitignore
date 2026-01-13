@@ -1,0 +1,9 @@
+# ignore all env files anywhere
+.env
+
+# node stuff
+node_modules
+
+# react build
+build
+dist
